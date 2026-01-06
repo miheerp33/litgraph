@@ -5,13 +5,13 @@ class NodeBase(BaseModel):
     type: str
 
 class NodeCreate(NodeBase):
-    pass
+    book_id: int
 
 class NodeRead(BaseModel):
     id: int
     name: str
     type: str
-
+    book_id: int
     model_config = ConfigDict(from_attributes=True)
 
 
@@ -31,3 +31,18 @@ class EdgeRead(BaseModel):
     relationship_type: str
 
     model_config = ConfigDict(from_attributes=True)
+
+class BookBase(BaseModel):
+    title: str
+
+class BookCreate(BookBase):
+    pass
+
+class BookRead(BookBase):
+    id: int
+    model_config = ConfigDict(from_attributes=True)
+
+class GraphRead(BaseModel):
+    book: BookRead
+    nodes: list[NodeRead]
+    edges: list[EdgeRead]
